@@ -29,7 +29,8 @@ int pilhaVazia(Pilha *p)
     return p->topo==-1;
 }
 
-int empilhar(Pilha *p, int valor) //push
+//PUSH - Complexidade constante O(1)
+int empilhar(Pilha *p, int valor) 
 {
     if (pilhaCheia(p))
        return ERROR;
@@ -40,7 +41,8 @@ int empilhar(Pilha *p, int valor) //push
        }
 }
 
-int desempilhar(Pilha *p)   //pop
+//POP - Complexidade constante O(1)
+int desempilhar(Pilha *p)   
 {
     if (pilhaVazia(p))
        return ERROR;
@@ -52,7 +54,8 @@ int desempilhar(Pilha *p)   //pop
       } 
 }
 
-int topo(Pilha *p)   //peek
+//PEEK - Complexidade constante O(1)
+int topo(Pilha *p)   
 {
     if (pilhaVazia(p))
       return ERROR;
@@ -61,6 +64,7 @@ int topo(Pilha *p)   //peek
 }
 
 // para efeitos didáticos
+// Complexidade linear O(N)
 void mostrarPilha(Pilha *p)
 {
     if (pilhaVazia(p))
