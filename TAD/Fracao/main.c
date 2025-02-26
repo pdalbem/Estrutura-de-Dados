@@ -6,7 +6,6 @@ int main()
 {
     Fracao *f1 = criarFracao(3, 4); 
     Fracao *f2 = criarFracao(1, 2); 
-
     printf("Fração 1 (f1): ");
     exibirFracao(f1);
     printf("Fração 2 (f2): ");

@@ -28,6 +28,7 @@ int main() {
     exibirAluno(aluno2);
     printf("\n");
 
+    matricular(aluno1,curso2); 
 
     free(curso1);
     free(curso2);

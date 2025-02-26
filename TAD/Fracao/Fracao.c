@@ -7,7 +7,6 @@ struct fracao
   int numerador, denominador;
 };
 
-
 Fracao* criarFracao(int num, int den)
 {
     Fracao *f = (Fracao*) malloc(sizeof(Fracao));
