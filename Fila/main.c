@@ -12,7 +12,7 @@ void limparTela()
 }
 
 int main()
-{
+{ 
     Fila *f= criarFila();
     if (f==NULL)
       printf("Não foi possível alocar memória");
@@ -22,7 +22,7 @@ int main()
         limparTela();
         printf("\n1 - Enfileirar");
         printf("\n2 - Desenfileirar");
-        printf("\n3 - Mostrar início");
+        printf("\n3 - Mostrar primeiro");
         printf("\n4 - Mostrar fila");
         printf("\n5 - Liberar fila");
         printf("\n6 - Sair");
@@ -51,9 +51,9 @@ int main()
             break;
           
         case 3:
-            resultado=inicioFila(f);
+            resultado=obterPrimeiro(f);
             if (resultado==ERROR)
-                printf("\nFila vazia");
+                printf("\Fila vazia");
             else
                 printf("\nItem no início:  %d", resultado);
         
