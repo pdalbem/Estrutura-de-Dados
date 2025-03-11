@@ -28,8 +28,8 @@ int filaVazia(Fila *f){
     return f->qtd==0;
 }
 
-// Complexidade constante O(1)
-int enfileirar(Fila *f, int valor){
+// enqueue - Complexidade constante O(1)
+int enfileirar(Fila *f, int valor){   
     if (filaCheia(f))
       return ERROR;
      else{
@@ -43,8 +43,8 @@ int enfileirar(Fila *f, int valor){
      } 
 }
 
-//Complexidade constante O(1)
-int desenfileirar(Fila *f){
+// dequeue = Complexidade constante O(1)
+int desenfileirar(Fila *f){  
     if (filaVazia(f))
          return ERROR;
        else{
@@ -55,7 +55,7 @@ int desenfileirar(Fila *f){
        }
 }
 
-//Complexidade constante O(1)
+// Complexidade constante O(1)
 int obterPrimeiro(Fila *f){
     if (filaVazia(f))
        return ERROR;
@@ -63,7 +63,7 @@ int obterPrimeiro(Fila *f){
         return f->item[f->inicio];  
 }
 
-//Complexidade linear O(n)
+// Complexidade linear O(n)
 void mostrarFila(Fila *f){
     if (filaVazia(f))
        printf("Fila vazia");
