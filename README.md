@@ -12,3 +12,5 @@ Material da disciplina de Estrutura de Dados (ESDD).
 [4. Fila](https://github.com/pdalbem/Estrutura-de-Dados/tree/main/Fila)
 
 [5. Lista](https://github.com/pdalbem/Estrutura-de-Dados/tree/main/Lista)
+
+[6. Lista Encadeada](https://github.com/pdalbem/Estrutura-de-Dados/tree/main/ListaEncadeada)
