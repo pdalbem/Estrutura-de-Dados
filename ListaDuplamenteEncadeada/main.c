@@ -72,7 +72,7 @@ int main()
             scanf("%d", &valor);
             resultado = remover(lista, valor);
             if (resultado == ERROR)
-                printf("\nErro ao remover. Elemento não encontrado.");
+                printf("\nErro ao remover. Lista vazia ou elemento não encontrado.");
             else
                 printf("\n%d removido com sucesso", valor);
             break;

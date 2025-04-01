@@ -129,9 +129,8 @@ void mostrar(Lista *lista)
         printf("Lista vazia!\n");
     else
     {
-
         No *aux = lista->inicio;
-        while (aux)
+        while (aux!=NULL)
         {
             printf("\n%d ", aux->item);
             aux = aux->prox;
