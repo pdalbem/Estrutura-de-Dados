@@ -47,28 +47,30 @@ int inserir(Lista *lista, int valor, int pos) {
 }
 
 // Complexidade linear O(n)
-int remover(Lista *lista, int pos) {
+int remover(Lista *lista, int pos, int *retorno) {
     if (listaVazia(lista)|| pos < 0 || pos > lista->tamanho) 
         return ERROR;  
     
        
     // Move os elementos para a esquerda para preencher a lacuna
-    int valor = lista->item[pos];
+    *retorno = lista->item[pos];
     for (int i = pos; i < lista->tamanho - 1; i++) 
          lista->item[i] = lista->item[i + 1];
     
        
     lista->tamanho--;
-    return valor;  
+    return SUCCESS;  
 }
 
 // Complexidade linear O(n)
-int buscar(Lista *lista, int valor){
+int buscar(Lista *lista, int valor, int *pos){
     if (listaVazia(lista))
        return ERROR;
     for (int i=0;i<lista->tamanho;i++)
-         if (lista->item[i]==valor)
-            return i;
+         if (lista->item[i]==valor){
+            *pos=i;
+            return SUCCESS;
+         }
           else
             return ERROR;     
 }

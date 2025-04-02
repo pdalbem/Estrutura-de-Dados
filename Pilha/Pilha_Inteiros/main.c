@@ -42,20 +42,20 @@ int main()
             break;
         
         case 2:
-            resultado=desempilhar(p);
+            resultado=desempilhar(p, &valor);
             if (resultado==ERROR)
               printf("\nPilha vazia");
             else
-              printf("\nItem %d removido", resultado);
+              printf("\nItem %d removido", valor);
             
             break;
           
         case 3:
-            resultado=topo(p);
+            resultado=topo(p,&valor);
             if (resultado==ERROR)
                 printf("\nPilha vazia");
             else
-                printf("\nItem no topo:  %d", resultado);
+                printf("\nItem no topo:  %d", valor);
         
             break;   
         

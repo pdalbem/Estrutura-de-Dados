@@ -30,37 +30,39 @@ int pilhaVazia(Pilha *p)
 }
 
 //PUSH - Complexidade constante O(1)
-Livro*  empilhar(Pilha *p, Livro *livro) 
+int empilhar(Pilha *p, Livro *livro) 
 {
     if (pilhaCheia(p))
-       return NULL;
+       return ERROR;
        else{
         p->topo++;
         p->item[p->topo]=livro;
-        return livro;
+        return SUCCESS;
        }
 }
 
 //POP - Complexidade constante O(1)
-Livro* desempilhar(Pilha *p)   
+int desempilhar(Pilha *p, Livro *livro)   
 {
     if (pilhaVazia(p))
-       return NULL;
+       return ERROR;
       else
       {
-        Livro* livro = p->item[p->topo];
+        livro = p->item[p->topo];
         p->topo--;
-        return livro;
+        return SUCCESS;
       } 
 }
 
 //PEEK - Complexidade constante O(1)
-Livro* topo(Pilha *p)   
+int topo(Pilha *p, Livro *livro)   
 {
     if (pilhaVazia(p))
-      return NULL;
-    else
-      return p->item[p->topo];
+      return ERROR;
+    else{
+        livro = p->item[p->topo];
+        return SUCCESS;
+    }
 }
 
 // para efeitos didáticos

@@ -22,7 +22,7 @@ int main()
         limparTela();
         printf("\n1 - Inserir");
         printf("\n2 - Remover");
-        printf("\n3 = Buscar");
+        printf("\n3 - Buscar");
         printf("\n4 - Mostrar lista");
         printf("\n5 - Liberar lista");
         printf("\n6 - Sair");
@@ -46,24 +46,24 @@ int main()
         case 2:
             printf("\nDigite a posição (índice do vetor) para remover: ");
             scanf("%d", &pos);    
-            resultado=remover(lista,pos);
+            resultado=remover(lista,pos, &valor);
             if (resultado==ERROR)
               printf("\nLista vazia ou posição inválida");
             else
-              printf("\nItem %d removido da posição %d", resultado, pos);
+              printf("\nItem %d removido da posição %d", valor, pos);
             
             break;
           
         case 3:
             printf("\nDigite o valor a ser procurado: ");
         scanf("%d", &valor);    
-        resultado=buscar(lista,valor);
+        resultado=buscar(lista,valor, &pos);
         if (resultado==ERROR)
           printf("\nLista vazia ou elemento não encontrado");
         else
-          printf("\nItem %d encontrado na posição %d", valor, resultado);  
+          printf("\nItem %d encontrado na posição %d", valor, pos);  
 
-
+          break;
         case 4:
             mostrarLista(lista);
             break;

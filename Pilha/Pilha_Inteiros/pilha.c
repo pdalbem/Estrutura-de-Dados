@@ -42,25 +42,27 @@ int empilhar(Pilha *p, int valor)
 }
 
 //POP - Complexidade constante O(1)
-int desempilhar(Pilha *p)   
+int desempilhar(Pilha *p, int *valor)   
 {
     if (pilhaVazia(p))
        return ERROR;
       else
       {
-        int valor = p->item[p->topo];
+        *valor = p->item[p->topo];
         p->topo--;
-        return valor;
+        return SUCCESS;
       } 
 }
 
 //PEEK - Complexidade constante O(1)
-int topo(Pilha *p)   
+int topo(Pilha *p, int *valor)   
 {
     if (pilhaVazia(p))
       return ERROR;
-    else
-      return p->item[p->topo];
+    else{
+      *valor=p->item[p->topo];
+      return SUCCESS;
+    }
 }
 
 // para efeitos didáticos

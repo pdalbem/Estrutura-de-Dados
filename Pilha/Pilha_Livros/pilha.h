@@ -5,8 +5,8 @@
 typedef struct pilha Pilha;
 
 Pilha* criarPilha();
-Livro*  empilhar(Pilha *p, Livro *livro); //push
-Livro* desempilhar(Pilha *p);         //pop
-Livro*  topo(Pilha *p);                //peek
+int empilhar(Pilha *p, Livro *livro); //push
+int desempilhar(Pilha *p, Livro *livro);         //pop
+int  topo(Pilha *p, Livro *livro);                //peek
 void mostrarPilha(Pilha *p); //fins educativos
 void liberarPilha(Pilha *p);

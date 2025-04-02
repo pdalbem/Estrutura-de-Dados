@@ -15,7 +15,7 @@ void mostrarResultado(Livro *resultado){
     printf("\nTítulo: %s ", getTitulo(resultado));
     printf("\nAutor: %s", getAutor(resultado));
     printf("\nEditora: %s", getEditora(resultado));
-    printf("\nAutor: %d", getAnoPublicacao(resultado));
+    printf("\Ano de publicação: %d", getAnoPublicacao(resultado));
 }
 
 int main()
@@ -29,7 +29,8 @@ int main()
     int opcao, valor, anoPublicacao;  
     char titulo[100], autor[100], editora[100];
 
-    Livro *livro, *resultado;
+    Livro *livro;
+    int resultado;
 
     do{
         limparTela();
@@ -56,31 +57,31 @@ int main()
             livro=criarLivro(titulo,autor,editora,anoPublicacao);
 
             resultado = empilhar(p, livro);
-            if (resultado==NULL)
+            if (resultado==ERROR)
               printf("\nPilha cheia, não foi possível inserir");
              else{
                printf("\nLivro inserido com sucesso");
-               mostrarResultado(resultado);
+               mostrarResultado(livro);
             } 
             break;
         
         case 2:
-            livro=desempilhar(p);
-            if (livro==NULL)
+            resultado=desempilhar(p, livro);
+            if (resultado==ERROR)
               printf("\nPilha vazia");
               else{
                 printf("\nLivro removido com sucesso");
-                mostrarResultado(resultado);
+                mostrarResultado(livro);
              } 
             break;
           
         case 3:
-            livro=topo(p);
-            if (livro==NULL)
+            resultado=topo(p,livro);
+            if (resultado==ERROR)
                 printf("\nPilha vazia");
                 else{
                     printf("\nLivro no topo:");
-                    mostrarResultado(resultado);
+                    mostrarResultado(livro);
                  } 
             break;   
         

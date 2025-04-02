@@ -5,7 +5,7 @@
 
 typedef struct no
 {
-    int item;
+    Veiculo *v;
     struct no *prox;
     struct no *ant;
 } No;
@@ -27,13 +27,13 @@ Lista *criarListaDuplamenteEncadeada()
     return lista;
 }
 
-int inserirInicio(Lista *lista, int valor)
+int inserirInicio(Lista *lista, Veiculo *veiculo)
 {
     No *no = (No *)malloc(sizeof(No));
     if (no == NULL)
         return ERROR;
 
-    no->item = valor;
+    no->v = veiculo;
     no->prox = lista->inicio;
     no->ant = NULL;
 
@@ -46,13 +46,13 @@ int inserirInicio(Lista *lista, int valor)
     return SUCCESS;
 }
 
-int inserirFinal(Lista *lista, int valor)
+int inserirFinal(Lista *lista, Veiculo *veiculo)
 {
     No *no = (No *)malloc(sizeof(No));
     if (no == NULL)
         return ERROR;
 
-    no->item = valor;
+    no->v = veiculo;
     no->prox = NULL;
     no->ant = lista->fim;
 
@@ -65,20 +65,20 @@ int inserirFinal(Lista *lista, int valor)
     return SUCCESS;
 }
 
-int inserirApos(Lista *lista, int valor, int itemExistente)
+int inserirApos(Lista *lista, Veiculo *veiculo, char* placaExistente)
 {
     No *aux = lista->inicio;
-    while (aux!=NULL && aux->item != itemExistente)
+    while (aux!=NULL &&  strcmp(getPlaca(aux->v), placaExistente) !=0)
         aux = aux->prox;
     
-    if (aux==NULL)
+    if (aux==NULL) //percorreu toda lista e não encontrou
         return ERROR;
 
     No *no = (No *)malloc(sizeof(No));
     if (no == NULL)
         return ERROR;
 
-    no->item = valor;
+    no->v = veiculo;
     no->prox = aux->prox;
     no->ant = aux;
 
@@ -96,29 +96,29 @@ int listaVazia(Lista *lista)
     return lista->inicio == NULL;
 }
 
-int remover(Lista *lista, int valor)
+int remover (Lista *lista, char *placaRemover)
 {
     if (listaVazia(lista))
         return ERROR;
 
     No *aux = lista->inicio;
-    while (aux!=NULL && aux->item != valor)
+    while (aux!=NULL &&  strcmp(getPlaca(aux->v), placaRemover) !=0)
         aux = aux->prox;
     
-    if (aux == NULL)
+    if (aux == NULL) //percorreu toda lista e não encontrou
         return ERROR;
 
-    if (aux->ant)
+    if (aux->ant!=NULL) //se itemExistente é primeiro elemento
         aux->ant->prox = aux->prox;
     else
         lista->inicio = aux->prox;
     
-    if (aux->prox)
+    if (aux->prox!=NULL)
         aux->prox->ant = aux->ant;
     else
         lista->fim = aux->ant;
     
-
+    free(aux->v);
     free(aux);
     return SUCCESS;
 }
@@ -132,7 +132,9 @@ void mostrar(Lista *lista)
         No *aux = lista->inicio;
         while (aux!=NULL)
         {
-            printf("\n%d ", aux->item);
+            printf("\nPlaca: %s", getPlaca(aux->v));
+            printf("\nMarca: %s", getMarca(aux->v));
+            printf("\nAno: %d", getAno(aux->v));
             aux = aux->prox;
         }
         printf("\n");
@@ -146,6 +148,7 @@ void liberarLista(Lista *lista){
     No *aux = lista->inicio;
     while(aux!=NULL){
         No *proximo = aux->prox;
+        free(aux->v);
         free(aux);
         aux=proximo;
     }

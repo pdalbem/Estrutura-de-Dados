@@ -44,23 +44,25 @@ int enfileirar(Fila *f, int valor){
 }
 
 // dequeue = Complexidade constante O(1)
-int desenfileirar(Fila *f){  
+int desenfileirar(Fila *f, int *valor){  
     if (filaVazia(f))
          return ERROR;
        else{
-        int valor = f->item[f->inicio];
+        *valor = f->item[f->inicio];
         f->inicio = (f->inicio+1) % MAXTAM;
         f->qtd--;
-        return valor;
+        return SUCCESS;
        }
 }
 
 // Complexidade constante O(1)
-int obterPrimeiro(Fila *f){
+int obterPrimeiro(Fila *f, int *valor){
     if (filaVazia(f))
        return ERROR;
-      else
-        return f->item[f->inicio];  
+      else{
+        *valor=f->item[f->inicio];
+        return SUCCESS;
+      }
 }
 
 // Complexidade linear O(n)

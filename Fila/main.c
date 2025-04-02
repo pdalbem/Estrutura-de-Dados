@@ -42,20 +42,20 @@ int main()
             break;
         
         case 2:
-            resultado=desenfileirar(f);
+            resultado=desenfileirar(f, &valor);
             if (resultado==ERROR)
               printf("\nFila vazia");
             else
-              printf("\nItem %d removido", resultado);
+              printf("\nItem %d removido", valor);
             
             break;
           
         case 3:
-            resultado=obterPrimeiro(f);
+            resultado=obterPrimeiro(f, &valor);
             if (resultado==ERROR)
-                printf("\Fila vazia");
+                printf("\nFila vazia");
             else
-                printf("\nItem no início:  %d", resultado);
+                printf("\nItem no início:  %d", valor);
         
             break;   
         
@@ -65,7 +65,7 @@ int main()
         
         case 5:
              liberarFila(f);
-             printf("Fila liberada e recriada");
+             printf("\nFila liberada e recriada");
              f=criarFila();
              break;   
         case 6:
