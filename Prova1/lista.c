@@ -2,21 +2,20 @@
 #include <stdlib.h>
 #include "lista.h"
 
-
 typedef struct no {
     Produto* produto;
     struct no* ant;
     struct no* prox;
 } No;
 
-typedef struct lista {
+struct lista {
     No* inicio;
     No* fim;
-} Lista;
+};
 
 Lista* criarLista() {
     Lista* lista = (Lista*)malloc(sizeof(Lista));
-    if (lista) {
+    if (lista!=NULL) {
         lista->inicio = NULL;
         lista->fim = NULL;
     }
@@ -31,7 +30,7 @@ int listaVazia(Lista *lista)
 int inserirProduto(Lista* lista, Produto* p) {
     No* no = (No*)malloc(sizeof(No));
     
-    if (!no) 
+    if (no==NULL) 
         return ERROR;
 
     no->produto = p;
@@ -45,15 +44,14 @@ int inserirProduto(Lista* lista, Produto* p) {
     }
 
     No* aux = lista->inicio;
-    while (aux && obterPreco(aux->produto) < obterPreco(p)) 
+    while (aux!=NULL && obterPreco(aux->produto) < obterPreco(p)) 
         aux = aux->prox;
     
-
-    if (!aux) { // inserir no final
+    if (aux==NULL) { // inserir no final
         no->ant = lista->fim;
         lista->fim->prox = no;
         lista->fim = no;
-    } else if (!aux->ant) { // inserir no início
+    } else if (aux->ant==NULL) { // inserir no início
         no->prox = aux;
         aux->ant = no;
         lista->inicio = no;
@@ -71,10 +69,10 @@ int removerProduto(Lista* lista, int codigo, Produto **p) {
        return ERROR;
 
     No* aux = lista->inicio;
-    while (aux && obterCodigo(aux->produto) != codigo) 
+    while (aux!=NULL && obterCodigo(aux->produto) != codigo) 
         aux = aux->prox;
     
-    if (!aux) 
+    if (aux==NULL)
         return ERROR; 
 
     if (aux->ant!=NULL) 
@@ -93,16 +91,19 @@ int removerProduto(Lista* lista, int codigo, Produto **p) {
 }
 
 float calcularPrecoMedio(Lista* lista) {
+    if (listaVazia(lista))
+       return 0.0;
+
     No* aux = lista->inicio;
     float soma = 0.0;
     int count = 0;
 
-    while (aux) {
+    while (aux!=NULL) {
         soma += obterPreco(aux->produto);
         count++;
         aux = aux->prox;
     }
-    return (count == 0) ? 0.0 : soma / count;
+    return soma / count;
 }
 
 void mostrarProdutos(Lista* lista) {
@@ -110,7 +111,7 @@ void mostrarProdutos(Lista* lista) {
         printf("\nLista vazia");
     else{
        No* aux = lista->inicio;
-       while (aux) {
+       while (aux!=NULL) {
          printf("Código: %d | Nome: %s | Preço: %.2f\n",
                obterCodigo(aux->produto),
                obterNome(aux->produto),
@@ -122,7 +123,7 @@ void mostrarProdutos(Lista* lista) {
 
 void liberarLista(Lista* lista) {
     No* aux = lista->inicio;
-    while (aux) {
+    while (aux!=NULL) {
         No* prox = aux->prox;
         liberarProduto(aux->produto);
         free(aux);
