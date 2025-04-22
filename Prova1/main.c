@@ -21,7 +21,7 @@ int main() {
     Lista* lista = criarLista();
     if (lista == NULL) {
         printf("Erro ao criar a lista.\n");
-        return 1;
+        return ERROR;
     }
 
     int opcao;
@@ -107,5 +107,5 @@ int main() {
 
     } while (opcao != 6);
 
-    return 0;
+    return SUCCESS;
 }
