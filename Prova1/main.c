@@ -55,9 +55,9 @@ int main() {
                 scanf("%f", &preco);
 
                 produto = criarProduto(codigo, nome, preco);
-                if (inserirProduto(lista, produto) == SUCCESS) {
+                if (inserirProduto(lista, produto) == SUCCESS) 
                     printf("Produto inserido com sucesso!\n");
-                } else {
+                 else {
                     printf("Erro ao inserir produto.\n");
                     liberarProduto(produto);
                 }
@@ -71,9 +71,9 @@ int main() {
                     printf("Produto removido com sucesso!\n");
                     mostrarProduto(produto);
                     liberarProduto(produto);
-                } else {
+                } else 
                     printf("Produto não encontrado ou lista vazia");
-                }
+                
                 break;
 
             case 3:

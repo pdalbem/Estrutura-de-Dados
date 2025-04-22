@@ -11,7 +11,7 @@ struct produto{
 
 Produto* criarProduto(int codigo, const char* nome, float preco) {
     Produto* p = (Produto*)malloc(sizeof(Produto));
-    if (p) {
+    if (p!=NULL) {
         p->codigo = codigo;
         strcpy(p->nome, nome);
         p->preco = preco;
