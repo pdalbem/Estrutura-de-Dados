@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "lista.h" // ou o nome correto do seu .h
+#include "lista.h" 
 
 void limparTela() {
 #ifdef _WIN32
