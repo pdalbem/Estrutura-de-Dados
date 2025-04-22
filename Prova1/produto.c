@@ -13,7 +13,7 @@ Produto* criarProduto(int codigo, const char* nome, float preco) {
     Produto* p = (Produto*)malloc(sizeof(Produto));
     if (p) {
         p->codigo = codigo;
-        strncpy(p->nome, nome, sizeof(p->nome));
+        strcpy(p->nome, nome);
         p->preco = preco;
     }
     return p;
