@@ -11,4 +11,3 @@ int removerProduto(Lista* lista, int codigo, Produto **p);
 float calcularPrecoMedio(Lista* lista);
 void mostrarProdutos(Lista* lista);
 void liberarLista(Lista* lista);
-

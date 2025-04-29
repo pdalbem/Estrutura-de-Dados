@@ -131,4 +131,3 @@ void liberarLista(Lista* lista) {
     }
     free(lista);
 }
-
