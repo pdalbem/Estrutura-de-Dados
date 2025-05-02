@@ -1,8 +1,9 @@
 typedef struct arvore Arvore;
 
-Arvore *inserir(int x, Arvore *p);
-Arvore *remover(Arvore *r, int elemento);
-void emordem(Arvore *p);
-void preordem(Arvore *p);
-void posordem(Arvore *p);
-void liberarArvore(Arvore *p);
+Arvore* criar_arvore();
+void inserir(Arvore* arvore, int valor); 
+void remover(Arvore* arvore, int valor); 
+void percurso_pre_ordem(Arvore *arvore);
+void percurso_em_ordem(Arvore *arvore);
+void percurso_pos_ordem(Arvore *arvore);
+void destruir_arvore(Arvore* arvore);

@@ -13,10 +13,15 @@ void limparTela()
 
 int main()
 {
-  Arvore *raiz = NULL;
+  Arvore *arvore = criar_arvore();
+  if (arvore==NULL){
+    printf("Não foi possível alocar memória");
+    exit(1);
+  }
+     
 
   int op;
-  int elem;
+  int valor;
   do
   {
     limparTela();
@@ -34,36 +39,36 @@ int main()
     case 1:
 
       printf("\nDigite o valor a ser inserido: ");
-      scanf("%d", &elem);
-      raiz = inserir(elem, raiz);
+      scanf("%d", &valor);
+      inserir(arvore, valor);
       break;
 
     case 2:
       printf("\nDigite o valor a ser removido: ");
-      scanf("%d", &elem);
-      raiz = remover(raiz, elem);
+      scanf("%d", &valor);
+      remover(arvore, valor);
       break;
 
     case 3:
-      (raiz == NULL) ? printf("Árvore vazia") : emordem(raiz);
+      percurso_em_ordem(arvore);
       break;
 
     case 4:
-      (raiz == NULL) ? printf("Árvore vazia") : preordem(raiz);
+      percurso_pre_ordem(arvore);
       break;
 
     case 5:
-      (raiz == NULL) ? printf("Árvore vazia") : posordem(raiz);
+      percurso_pos_ordem(arvore);
       break;
 
     case 6:
-      liberarArvore(raiz);
-      raiz=NULL;
+      destruir_arvore(arvore);
+      arvore=criar_arvore();
       break;
 
     case 7:
     printf("\nSaindo...");
-    liberarArvore(raiz);
+    destruir_arvore(arvore);
     break;
 
     default:

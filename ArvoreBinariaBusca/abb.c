@@ -2,111 +2,160 @@
 #include <stdlib.h>
 #include "abb.h"
 
-struct arvore
-{
+typedef struct no {
   int valor;
-  struct arvore *esq;
-  struct arvore *dir;
+  struct no *esq;
+  struct no *dir;
+} No;
+
+struct arvore {
+  No *raiz;
 };
 
-Arvore *inserir(int x, Arvore *p)
-{
-  if (p == NULL)
-  {
-    p = (Arvore *)malloc(sizeof(Arvore));
-    if (p == NULL) {
-      printf("Erro ao alocar memória");
-      exit(1); 
-    }
-    p->valor = x;
-    p->dir = NULL;
-    p->esq = NULL;
-  }
-  else
-  {
-    if (x < p->valor)
-      p->esq = inserir(x, p->esq);
-    if (x > p->valor)
-      p->dir = inserir(x, p->dir);
-    if (x == p->valor)
-      printf("Valor já existe");
-  }
-  return p;
+Arvore* criar_arvore() {
+  Arvore *arvore = malloc(sizeof(Arvore));
+  if (arvore)
+     arvore->raiz = NULL;
+  return arvore;
 }
 
-Arvore *remover(Arvore *r, int elemento) {
-  Arvore *p;
-  if (r == NULL) 
-      return NULL;
+No* criar_no(int valor) {
+  No *no = malloc(sizeof(No));
+  if (no){
+     no->valor = valor;
+     no->esq = NULL;
+     no->dir = NULL;
+  }
+  return no;
+}
+
+No* inserir_no(No* raiz, int valor) {
+  if (raiz == NULL) 
+      return criar_no(valor);
   
 
-  if (elemento < r->valor) 
-      r->esq = remover(r->esq, elemento);
-  else if (elemento > r->valor) 
-      r->dir = remover(r->dir, elemento);
- else {
-      // Encontrou o nó a ser removido
-      if (r->esq == NULL && r->dir == NULL) {
-          free(r);
+  if (valor < raiz->valor) 
+      raiz->esq = inserir_no(raiz->esq, valor);
+   else if (valor > raiz->valor) 
+      raiz->dir = inserir_no(raiz->dir, valor);
+
+  return raiz;
+}
+
+void inserir(Arvore* arvore, int valor) {
+  arvore->raiz = inserir_no(arvore->raiz, valor);
+}
+
+No* encontrar_minimo(No* raiz) {
+  while (raiz->esq != NULL)
+      raiz = raiz->esq;
+  return raiz;
+}
+
+No* remover_no(No* raiz, int valor) {
+  if (raiz == NULL)
+      return NULL;
+
+  if (valor < raiz->valor) {
+      raiz->esq = remover_no(raiz->esq, valor);
+  } else if (valor > raiz->valor) {
+      raiz->dir = remover_no(raiz->dir, valor);
+  } else {
+      // Caso 1: sem filhos
+      if (raiz->esq == NULL && raiz->dir == NULL) {
+          free(raiz);
           return NULL;
-      } else if (r->esq == NULL) {
-          p = r->dir;
-          free(r);
-          return p;
-      } else if (r->dir == NULL) {
-          p = r->esq;
-          free(r);
-          return p;
-      } else {
-          // Dois filhos: substitui pelo menor da subárvore direita
-          p = r->dir;
-          while (p->esq != NULL) {
-              p = p->esq;
-          }
-          r->valor = p->valor;
-          r->dir = remover(r->dir, p->valor);
+      }
+      // Caso 2: um filho
+      else if (raiz->esq == NULL) {
+          No* temp = raiz->dir;
+          free(raiz);
+          return temp;
+      }
+      else if (raiz->dir == NULL) {
+          No* temp = raiz->esq;
+          free(raiz);
+          return temp;
+      }
+      // Caso 3: dois filhos
+      else {
+          //menor valor da subarvore direita 
+          No* sucessor = raiz->dir;
+          while (sucessor->esq != NULL)
+                 sucessor = sucessor->esq;
+         
+          raiz->valor = sucessor->valor;
+          raiz->dir = remover_no(raiz->dir, sucessor->valor);
       }
   }
 
-  return r;
+  return raiz;
+}
+
+void remover(Arvore* arvore, int valor) {
+  arvore->raiz = remover_no(arvore->raiz, valor);
 }
 
 
-void emordem(Arvore *p)
-{
-  if (p != NULL)
-  {
-    emordem(p->esq);
-    printf("%d ", p->valor);
-    emordem(p->dir);
+void pre_ordem(No* raiz) {
+  if (raiz) {
+      printf("%d ", raiz->valor);
+      pre_ordem(raiz->esq);
+      pre_ordem(raiz->dir);
   }
 }
 
-void preordem(Arvore *p)
-{
+void percurso_pre_ordem(Arvore *arvore){
+  if (arvore == NULL || arvore->raiz == NULL) {
+    printf("Árvore vazia");
+    return;
+  }
+  pre_ordem(arvore->raiz);
+}
 
-  if (p != NULL)
-  {
-    printf("%d ", p->valor);
-    preordem(p->esq);
-    preordem(p->dir);
+void em_ordem(No* raiz) {
+  if (raiz) {
+      em_ordem(raiz->esq);
+      printf("%d ", raiz->valor);
+      em_ordem(raiz->dir);
   }
 }
 
-void posordem(Arvore *p)
-{
-  if (p != NULL)
-  {
-    posordem(p->esq);
-    posordem(p->dir);
-    printf("%d ", p->valor);
+void percurso_em_ordem(Arvore *arvore){
+  if (arvore == NULL || arvore->raiz == NULL) {
+    printf("Árvore vazia");
+    return;
+  }
+  em_ordem(arvore->raiz);
+}
+
+void pos_ordem(No* raiz) {
+  if (raiz) {
+      pos_ordem(raiz->esq);
+      pos_ordem(raiz->dir);
+      printf("%d ", raiz->valor);
   }
 }
 
-void liberarArvore(Arvore *p) {
-  if (p != NULL) {
-    liberarArvore(p->esq);
-    liberarArvore(p->dir);
-       free(p);
+void percurso_pos_ordem(Arvore *arvore){
+  if (arvore == NULL || arvore->raiz == NULL) {
+    printf("Árvore vazia");
+    return;
+  }
+  pos_ordem(arvore->raiz);
+}
+
+void destruir_nos(No* raiz) {
+  if (raiz) {
+      destruir_nos(raiz->esq);
+      destruir_nos(raiz->dir);
+      free(raiz);
+  }
+}
+
+void destruir_arvore(Arvore* arvore) {
+  if (arvore) {
+      destruir_nos(arvore->raiz);
+      free(arvore);
   }
 }
