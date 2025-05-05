@@ -18,3 +18,7 @@ Material da disciplina de Estrutura de Dados (ESDD).
 [7. Lista Duplamente Encadeada](https://github.com/pdalbem/Estrutura-de-Dados/tree/main/ListaDuplamenteEncadeada)
 
 [8. Árvore Binária de Busca](https://github.com/pdalbem/Estrutura-de-Dados/tree/main/ArvoreBinariaBusca)
+
+[9. Árvore AVL](https://github.com/pdalbem/Estrutura-de-Dados/tree/main/AVL)
+
+[10. Heap](https://github.com/pdalbem/Estrutura-de-Dados/tree/main/Heap)
