@@ -46,12 +46,6 @@ void inserir(Arvore* arvore, int valor) {
   arvore->raiz = inserir_no(arvore->raiz, valor);
 }
 
-No* encontrar_minimo(No* raiz) {
-  while (raiz->esq != NULL)
-      raiz = raiz->esq;
-  return raiz;
-}
-
 No* remover_no(No* raiz, int valor) {
   if (raiz == NULL)
       return NULL;
