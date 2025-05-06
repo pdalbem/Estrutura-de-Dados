@@ -52,7 +52,7 @@ No* rotacao_esquerda(No* x) {
 }
 
 No* criar_no(int valor) {
-    No* novo = malloc(sizeof(No));
+    No* novo = (No*) malloc(sizeof(No));
     if (novo) {
         novo->valor = valor;
         novo->esq = novo->dir = NULL;

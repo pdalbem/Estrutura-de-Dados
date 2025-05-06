@@ -13,14 +13,14 @@ struct arvore {
 };
 
 Arvore* criar_arvore() {
-  Arvore *arvore = malloc(sizeof(Arvore));
+  Arvore *arvore = (Arvore*) malloc(sizeof(Arvore));
   if (arvore)
      arvore->raiz = NULL;
   return arvore;
 }
 
 No* criar_no(int valor) {
-  No *no = malloc(sizeof(No));
+  No *no = (No*) malloc(sizeof(No));
   if (no){
      no->valor = valor;
      no->esq = NULL;

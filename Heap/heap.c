@@ -16,7 +16,7 @@ int filho_dir(int i) { return 2 * i + 2; }
 
 
 Heap* criar_heap() {
-    Heap* h = malloc(sizeof(Heap));
+    Heap* h = (Heap*) malloc(sizeof(Heap));
     if (!h) {
         fprintf(stderr, "Erro ao alocar heap\n");
         exit(1);
