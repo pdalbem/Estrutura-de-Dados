@@ -24,3 +24,5 @@ Material da disciplina de Estrutura de Dados (ESDD).
 [10. Heap](https://github.com/pdalbem/Estrutura-de-Dados/tree/main/Heap)
 
 [11. Grafo](https://github.com/pdalbem/Estrutura-de-Dados/tree/main/Grafo)
+
+[12. Tabela Hash](https://github.com/pdalbem/Estrutura-de-Dados/tree/main/HashTable)
