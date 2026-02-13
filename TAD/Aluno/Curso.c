@@ -17,6 +17,19 @@ Curso* criarCurso(const char* sigla, const char* nome) {
     return novoCurso;
 }
 
-void exibirCurso(Curso* curso) {
-    printf("\nCurso: %s (%s)\n", curso->nome, curso->sigla);
+void obterSigla(Curso *c, char* sigla)
+{
+    if (c!= NULL && sigla !=NULL)
+        strcpy(sigla, c->sigla);
+}
+
+void obterNomeCurso(Curso *c, char* nome)
+{
+    if (c!= NULL && nome !=NULL)
+        strcpy(nome, c->nome);
+}
+
+void liberarCurso(Curso *c)
+{
+    free(c);
 }

@@ -16,39 +16,45 @@ Conta* criarConta(int num, double saldo) {
     return novaConta;
 }
 
-void depositar(Conta *conta, double valor) {
+int depositar(Conta *conta, double valor) {
     if (valor > 0) {
         conta->saldo += valor;
-        printf("Deposito de R$%.2f realizado com sucesso!\n", valor);
+        return SUCCESS;
     } else {
-        printf("Valor de depósito inválido!\n");
+       return ERROR;
     }
 }
 
-void sacar(Conta *conta, double valor) {
+int sacar(Conta *conta, double valor) {
     if (valor > 0 && valor <= conta->saldo) {
         conta->saldo -= valor;
-        printf("Saque de R$%.2f realizado com sucesso!\n", valor);
-    } else if (valor <= 0) {
-        printf("Valor de saque inválido!\n");
-    } else {
-        printf("Saldo insuficiente para saque!\n");
+      return SUCCESS;
+    } else  {
+       return ERROR;
     }
 }
 
-void transferir(Conta *origem, Conta *destino, double valor) {
+int transferir(Conta *origem, Conta *destino, double valor) {
     if (valor > 0 && valor <= origem->saldo) {
         origem->saldo -= valor;
         destino->saldo += valor;
-        printf("Transferência de R$%.2f realizada com sucesso!\n", valor);
-    } else if (valor <= 0) {
-        printf("Valor de transferência inválido!\n");
-    } else {
-        printf("Saldo insuficiente para transferência!\n");
-    }
+        return SUCCESS;
+    } else return ERROR;
 }
 
-void exibirConta(Conta *conta) {
-    printf("Conta nº %d\n", conta->num);
-    printf("Saldo: R$%.2f\n", conta->saldo);
+int obterNum(Conta *conta)
+{
+    if (conta!=NULL)
+        return conta->num;
+}
+
+double obterSaldo(Conta * conta)
+{
+    if (conta!=NULL)
+        return conta->saldo;
+}
+
+void liberarConta(Conta *conta)
+{
+    free(conta);
 }

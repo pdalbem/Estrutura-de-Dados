@@ -7,33 +7,23 @@ int main() {
     Curso* curso1 = criarCurso("ADS", "Análise e Desenvolvimento de Sistemas");
     Curso* curso2 = criarCurso("BES", "Bach. Engenharia de Software");
 
-    printf("Informações do Curso 1:");
-    exibirCurso(curso1);
-    printf("\n");
-
-    printf("Informações do Curso 2:");
-    exibirCurso(curso2);
-    printf("\n");
-
-
     Aluno* aluno1 = criarAluno("João", 12345, curso1); 
     Aluno* aluno2 = criarAluno("Maria", 67890, curso2); 
 
 
-    printf("Informações do Aluno 1:\n");
-    exibirAluno(aluno1);
-    printf("\n");
+    char nomeAluno[100];
+    obterNomeAluno(aluno1,nomeAluno);
 
-    printf("Informações do Aluno 2:\n");
-    exibirAluno(aluno2);
-    printf("\n");
+    Curso* cursoAluno = obterCurso(aluno1);
+    char nomeCurso[100];
+    obterNomeCurso(cursoAluno, nomeCurso);
 
-    matricular(aluno1,curso2); 
+    printf("Pront: %d, Nome: %s, Curso: %s \n",obterProntuario(aluno1), nomeAluno, nomeCurso);
 
-    free(curso1);
-    free(curso2);
-    free(aluno1);
-    free(aluno2);
+    liberarCurso(curso1);
+    liberarCurso(curso2);
+    liberarAluno(aluno1);
+    liberarAluno(aluno2);
 
     return 0;
 }

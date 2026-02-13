@@ -28,10 +28,7 @@ double calcularPerimetro(Retangulo* retangulo) {
     return 2 * (retangulo->altura + retangulo->largura);
 }
 
-void exibirRetangulo(Retangulo* retangulo) {
-    printf("Retângulo:\n");
-    printf("Altura: %.2f\n", retangulo->altura);
-    printf("Largura: %.2f\n", retangulo->largura);
-    printf("Área: %.2f\n", calcularArea(retangulo));
-    printf("Perímetro: %.2f\n", calcularPerimetro(retangulo));
+void liberar(Retangulo *retangulo)
+{
+    free(retangulo);
 }

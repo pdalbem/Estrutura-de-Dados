@@ -8,4 +8,7 @@ Fracao* dividirFracao(Fracao *f1, Fracao *f2);
 void simplificarFracao(Fracao *f);
 int compararFracao(Fracao *f1, Fracao *f2);
 float converterParaDecimal(Fracao *f);
-void exibirFracao(Fracao *f);
+int obterNumerador(Fracao *f);
+int obterDenominador(Fracao *f);
+int obterNumerador(Fracao *f);
+int obterDenominador(Fracao *f);

@@ -4,43 +4,42 @@
 
 struct fracao
 {
-  int numerador, denominador;
+    int numerador, denominador;
 };
 
-Fracao* criarFracao(int num, int den)
+Fracao *criarFracao(int num, int den)
 {
-    Fracao *f = (Fracao*) malloc(sizeof(Fracao));
-    if (f == NULL) {
-        printf("Erro de alocação de memória\n");           
-         return NULL;
+    Fracao *f = (Fracao *)malloc(sizeof(Fracao));
+    if (f != NULL)
+    {
+        f->numerador = num;
+        f->denominador = den;
     }
-    f->numerador=num;
-    f->denominador=den;
     return f;
 }
 
-Fracao* somarFracao(Fracao *f1, Fracao *f2)
+Fracao *somarFracao(Fracao *f1, Fracao *f2)
 {
     int numerador = f1->numerador * f2->denominador + f2->numerador * f1->denominador;
     int denominador = f1->denominador * f2->denominador;
     return criarFracao(numerador, denominador);
 }
 
-Fracao* subtrairFracao(Fracao *f1, Fracao *f2)
+Fracao *subtrairFracao(Fracao *f1, Fracao *f2)
 {
     int numerador = f1->numerador * f2->denominador - f2->numerador * f1->denominador;
     int denominador = f1->denominador * f2->denominador;
     return criarFracao(numerador, denominador);
 }
 
-Fracao* multiplicarFracao(Fracao *f1, Fracao *f2)
+Fracao *multiplicarFracao(Fracao *f1, Fracao *f2)
 {
     int numerador = f1->numerador * f2->numerador;
     int denominador = f1->denominador * f2->denominador;
     return criarFracao(numerador, denominador);
 }
 
-Fracao* dividirFracao(Fracao *f1, Fracao *f2)
+Fracao *dividirFracao(Fracao *f1, Fracao *f2)
 {
     int numerador = f1->numerador * f2->denominador;
     int denominador = f1->denominador * f2->numerador;
@@ -50,14 +49,14 @@ Fracao* dividirFracao(Fracao *f1, Fracao *f2)
 // Função para calcular o Máximo Divisor Comum (MDC)
 int mdc(int a, int b)
 {
-    while (b != 0) {
+    while (b != 0)
+    {
         int temp = b;
         b = a % b;
         a = temp;
     }
     return a;
 }
-
 
 void simplificarFracao(Fracao *f)
 {
@@ -70,19 +69,24 @@ int compararFracao(Fracao *f1, Fracao *f2)
 {
     int resultado_f1 = f1->numerador * f2->denominador;
     int resultado_f2 = f2->numerador * f1->denominador;
-    if (resultado_f1 > resultado_f2) return 1;  // f1 > f2
-    if (resultado_f1 < resultado_f2) return -1; // f1 < f2
-    return 0; // f1 == f2
+    if (resultado_f1 > resultado_f2)
+        return 1; // f1 > f2
+    if (resultado_f1 < resultado_f2)
+        return -1; // f1 < f2
+    return 0;      // f1 == f2
 }
 
 float converterParaDecimal(Fracao *f)
 {
-    return (float) f->numerador / f->denominador;
+    return (float)f->numerador / f->denominador;
 }
 
-void exibirFracao(Fracao *f)
-{
-    if (f != NULL) {
-        printf("%d/%d\n", f->numerador, f->denominador);
-    }
+int obterNumerador(Fracao *f){
+    if (f!=NULL)
+        return f->numerador;
+}
+
+int obterDenominador(Fracao *f){
+    if (f!=NULL)
+        return f->denominador;
 }

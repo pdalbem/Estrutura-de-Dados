@@ -1,54 +1,42 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "Conta.h"
 
 int main() {
     Conta* conta1 = criarConta(1234, 500.00);  
     Conta* conta2 = criarConta(5678, 1000.00); 
 
-    printf("Informações da Conta 1:\n");
-    exibirConta(conta1);
-    printf("\n");
+    printf("Saldo da Conta 1: %.2f \n", obterSaldo(conta1));
 
-    printf("Informações da Conta 2:\n");
-    exibirConta(conta2);
-    printf("\n");
+    printf("Saldo da Conta 2: %.2f \n", obterSaldo(conta2));
+  
 
-    depositar(conta1, 200.00); 
-    depositar(conta2, 150.00); 
+    if (depositar(conta1, 200.00))
+        printf("Depósito efetuado com sucesso\n");
 
-    printf("Informações da Conta 1 após depósito:\n");
-    exibirConta(conta1);
-    printf("\n");
+    if (depositar(conta2, 150.00))
+        printf("Depósito efetuado com sucesso\n"); 
 
-    printf("Informações da Conta 2 após depósito:\n");
-    exibirConta(conta2);
-    printf("\n");
+    printf("Saldo da Conta 1: %.2f \n", obterSaldo(conta1));
 
+    printf("Saldo da Conta 2: %.2f \n", obterSaldo(conta2));
  
     sacar(conta1, 100.00);  
     sacar(conta2, 50.00);   
 
-    printf("Informações da Conta 1 após saque:\n");
-    exibirConta(conta1);
-    printf("\n");
+    printf("Saldo da Conta 1: %.2f \n", obterSaldo(conta1));
 
-    printf("Informações da Conta 2 após saque:\n");
-    exibirConta(conta2);
-    printf("\n");
+    printf("Saldo da Conta 2: %.2f \n", obterSaldo(conta2));
 
 
     transferir(conta1, conta2, 150.00); 
 
-    printf("Informações da Conta 1 após transferência:\n");
-    exibirConta(conta1);
-    printf("\n");
+    printf("Saldo da Conta 1: %.2f \n", obterSaldo(conta1));
 
-    printf("Informações da Conta 2 após transferência:\n");
-    exibirConta(conta2);
-    printf("\n");
+    printf("Saldo da Conta 2: %.2f \n", obterSaldo(conta2));
 
-    free(conta1);
-    free(conta2);
+    liberarConta(conta1);
+    liberarConta(conta2);
 
     return 0;
 }
