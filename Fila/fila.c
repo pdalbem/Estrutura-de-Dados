@@ -1,83 +1,91 @@
 #include <stdio.h>
-#include<stdlib.h>
+#include <stdlib.h>
 #include "fila.h"
 
 #define MAXTAM 5
 
-struct fila{
+struct fila
+{
     int item[MAXTAM];
     int inicio, fim, qtd;
 };
 
-Fila* criarFila(){
-    Fila *f=(Fila*)malloc(sizeof(Fila));
-    if (f==NULL)
-       return NULL;
-    
-    f->inicio=0;
-    f->fim=-1;
-    f->qtd=0;
-    return f;   
+Fila *criarFila()
+{
+    Fila *f = (Fila *)malloc(sizeof(Fila));
+    if (f != NULL)
+    {
+        f->inicio = 0;
+        f->fim = -1;
+        f->qtd = 0;
+    }
+    return f;
 }
 
-int filaCheia(Fila *f){
-    return f->qtd==MAXTAM;
+int filaCheia(Fila *f)
+{
+    return f->qtd == MAXTAM;
 }
 
-int filaVazia(Fila *f){
-    return f->qtd==0;
+int filaVazia(Fila *f)
+{
+    return f->qtd == 0;
 }
 
 // enqueue - Complexidade constante O(1)
-int enfileirar(Fila *f, int valor){   
+int enfileirar(Fila *f, int valor)
+{
     if (filaCheia(f))
-      return ERROR;
-     else{
-        // f->fim++;
-        // if (f->fim==MAXTAM)
-        //    f->fim=0;
-        f->fim = (f->fim+1) % MAXTAM;
-        f->item[f->fim] = valor;
-        f->qtd++;
-        return SUCCESS;
-     } 
+        return ERROR;
+
+    // f->fim++;
+    // if (f->fim==MAXTAM)
+    //    f->fim=0;
+    f->fim = (f->fim + 1) % MAXTAM;
+    f->item[f->fim] = valor;
+    f->qtd++;
+    return SUCCESS;
 }
 
 // dequeue = Complexidade constante O(1)
-int desenfileirar(Fila *f, int *valor){  
+int desenfileirar(Fila *f, int *valor)
+{
     if (filaVazia(f))
-         return ERROR;
-       else{
-        *valor = f->item[f->inicio];
-        f->inicio = (f->inicio+1) % MAXTAM;
-        f->qtd--;
-        return SUCCESS;
-       }
+        return ERROR;
+
+    *valor = f->item[f->inicio];
+    f->inicio = (f->inicio + 1) % MAXTAM;
+    f->qtd--;
+    return SUCCESS;
 }
 
 // Complexidade constante O(1)
-int obterPrimeiro(Fila *f, int *valor){
+int obterPrimeiro(Fila *f, int *valor)
+{
     if (filaVazia(f))
-       return ERROR;
-      else{
-        *valor=f->item[f->inicio];
-        return SUCCESS;
-      }
+        return ERROR;
+
+    *valor = f->item[f->inicio];
+    return SUCCESS;
 }
 
 // Complexidade linear O(n)
-void mostrarFila(Fila *f){
+void mostrarFila(Fila *f)
+{
     if (filaVazia(f))
-       printf("Fila vazia");
-     else{
-        int i = f->inicio; 
-        for (int cont=0;cont<f->qtd;cont++){
-             printf("Item: %d\n", f->item[i]);
-             i = (i+1) % MAXTAM; 
+        printf("Fila vazia");
+    else
+    {
+        int i = f->inicio;
+        for (int cont = 0; cont < f->qtd; cont++)
+        {
+            printf("Item: %d\n", f->item[i]);
+            i = (i + 1) % MAXTAM;
         }
-     }  
+    }
 }
 
-void liberarFila(Fila *f){
+void liberarFila(Fila *f)
+{
     free(f);
 }

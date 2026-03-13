@@ -14,8 +14,10 @@ void limparTela()
 int main()
 { 
     Lista *lista= criarLista();
-    if (lista==NULL)
+    if (lista==NULL){
       printf("Não foi possível alocar memória");
+      exit(1);
+    }
     
     int opcao, valor, resultado, pos;  
     do{

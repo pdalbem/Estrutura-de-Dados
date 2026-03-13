@@ -14,8 +14,10 @@ void limparTela()
 int main()
 { 
     Fila *f= criarFila();
-    if (f==NULL)
+    if (f==NULL){
       printf("Não foi possível alocar memória");
+      exit(1);  
+    }
     
     int opcao, valor, resultado;  
     do{

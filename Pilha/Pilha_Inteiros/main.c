@@ -14,8 +14,10 @@ void limparTela()
 int main()
 {
     Pilha *p= criarPilha();
-    if (p==NULL)
+    if (p==NULL){
       printf("Não foi possível alocar memória");
+      exit(1);  
+    }
     
     int opcao, valor, resultado;  
     do{
