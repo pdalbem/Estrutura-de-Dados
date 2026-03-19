@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include "listaduplamenteencadeada.h"
 
 typedef struct no
@@ -19,12 +18,17 @@ struct lista
 Lista *criarListaDuplamenteEncadeada()
 {
     Lista *lista = (Lista *)malloc(sizeof(Lista));
-    if (lista!=NULL)
+    if (lista != NULL)
     {
         lista->inicio = NULL;
         lista->fim = NULL;
     }
     return lista;
+}
+
+int listaVazia(Lista *lista)
+{
+    return lista->inicio == NULL;
 }
 
 int inserirInicio(Lista *lista, int valor)
@@ -37,11 +41,11 @@ int inserirInicio(Lista *lista, int valor)
     no->prox = lista->inicio;
     no->ant = NULL;
 
-    if (lista->inicio!=NULL)
-        lista->inicio->ant = no;
-    else
+    if (listaVazia(lista))
         lista->fim = no;
-    
+    else
+        lista->inicio->ant = no;
+
     lista->inicio = no;
     return SUCCESS;
 }
@@ -56,10 +60,10 @@ int inserirFinal(Lista *lista, int valor)
     no->prox = NULL;
     no->ant = lista->fim;
 
-    if (lista->fim!=NULL)
-        lista->fim->prox = no;
-    else
+    if (listaVazia(lista))
         lista->inicio = no;
+    else
+        lista->fim->prox = no;
 
     lista->fim = no;
     return SUCCESS;
@@ -68,10 +72,10 @@ int inserirFinal(Lista *lista, int valor)
 int inserirApos(Lista *lista, int valor, int itemExistente)
 {
     No *aux = lista->inicio;
-    while (aux!=NULL && aux->item != itemExistente)
+    while (aux != NULL && aux->item != itemExistente)
         aux = aux->prox;
-    
-    if (aux==NULL) //percorreu toda lista e não encontrou
+
+    if (aux == NULL) // percorreu toda lista e não encontrou
         return ERROR;
 
     No *no = (No *)malloc(sizeof(No));
@@ -82,18 +86,13 @@ int inserirApos(Lista *lista, int valor, int itemExistente)
     no->prox = aux->prox;
     no->ant = aux;
 
-    if (aux->prox!=NULL)
+    if (aux->prox != NULL) 
         aux->prox->ant = no;
     else
-        lista->fim = no;
-    
+        lista->fim = no; //elemento procurado era o último da lista
+
     aux->prox = no;
     return SUCCESS;
-}
-
-int listaVazia(Lista *lista)
-{
-    return lista->inicio == NULL;
 }
 
 int remover(Lista *lista, int valor)
@@ -102,22 +101,21 @@ int remover(Lista *lista, int valor)
         return ERROR;
 
     No *aux = lista->inicio;
-    while (aux!=NULL && aux->item != valor)
+    while (aux != NULL && aux->item != valor)
         aux = aux->prox;
-    
-    if (aux == NULL) //percorreu toda lista e não encontrou
+
+    if (aux == NULL) // percorreu toda lista e não encontrou
         return ERROR;
 
-    if (aux->ant!=NULL) //se itemExistente é primeiro elemento
+    if (aux->ant != NULL) //  NÃO é primeiro elemento
         aux->ant->prox = aux->prox;
     else
-        lista->inicio = aux->prox;
-    
-    if (aux->prox!=NULL)
+        lista->inicio = aux->prox; //valor a ser removido é o primeiro
+
+    if (aux->prox != NULL) // valor não é o último
         aux->prox->ant = aux->ant;
     else
-        lista->fim = aux->ant;
-    
+        lista->fim = aux->ant; //valor é o último elemento
 
     free(aux);
     return SUCCESS;
@@ -130,7 +128,7 @@ void mostrar(Lista *lista)
     else
     {
         No *aux = lista->inicio;
-        while (aux!=NULL)
+        while (aux != NULL)
         {
             printf("\n%d ", aux->item);
             aux = aux->prox;
@@ -139,15 +137,17 @@ void mostrar(Lista *lista)
     }
 }
 
-void liberarLista(Lista *lista){
-    if (lista==NULL)
-      return;
+void liberarLista(Lista *lista)
+{
+    if (lista == NULL)
+        return;
 
     No *aux = lista->inicio;
-    while(aux!=NULL){
+    while (aux != NULL)
+    {
         No *proximo = aux->prox;
         free(aux);
-        aux=proximo;
+        aux = proximo;
     }
     free(lista);
 }

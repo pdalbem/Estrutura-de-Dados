@@ -1,5 +1,5 @@
-#define ERROR -1
-#define SUCCESS 0
+#define ERROR 0
+#define SUCCESS 1
 
 typedef struct lista Lista;
 
