@@ -163,7 +163,7 @@ Exemplo:
 
 Ao implementar concretamente um Tipo Abstrato de Dados (TAD), podemos classificar a implementação segundo dois critérios independentes:
 
-* Forma de r*epresentação dos dados na memória*: como os elementos se relacionam logicamente.
+* Forma de *representação dos dados na memória*: como os elementos se relacionam logicamente.
 
 * Forma de *alocação da memória*: como e quando o espaço de memória é reservado.
 
